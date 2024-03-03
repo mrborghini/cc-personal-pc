@@ -22,4 +22,33 @@ in the CC Tweaked shell
 setup
 ``` 
 Once it's done installing you need to reboot the minecraft ![2024-03-03_23 00 04](https://github.com/lamborghinigamer1/cc-personal-pc/assets/61702082/92b2a485-cd3d-422f-bd11-39af1e932651)
-computer
+
+## What can you do with this?
+
+Well this program has a clone of ```cat``` from the GNU project and multiple useful utilities like random quotes. Ascii art and a user friendly update tool.
+
+## Commands:
+
+```
+cat <path>
+```
+
+```
+update
+```
+
+```
+ascii
+```
+
+```
+quote
+```
+
+```
+startanim
+```
+
+```
+setup  // only required once
+```
