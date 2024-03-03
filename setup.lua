@@ -17,12 +17,16 @@ local function showProgressBar(done, total)
 
     -- Loop over the amount of hashtags and add them to the string
     for _ = 1, num_hashtags do
+        term.setTextColor(color.green)
         final_string = final_string .. "#"
+        term.setTextColor(color.reset)
     end
 
     -- Same thing for the dashes
     for _ = 1, num_dashes do
+        term.setTextColor(color.yellow)
         final_string = final_string .. "-"
+        term.setTextColor(color.reset)
     end
 
     -- Clear the current line the cursor is on
@@ -119,6 +123,7 @@ function Main()
     print("\nDone! Please hold Ctrl R or press the restart button")
 
     CleanUp() -- Remove the setup script
+    os.reboot()
 end
 
 Main()

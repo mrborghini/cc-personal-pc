@@ -17,7 +17,6 @@ function ApplyUpdate()
     DownloadFile("https://raw.githubusercontent.com/lamborghinigamer1/cc-personal-pc/master/setup.lua", "/")
     print("Waiting 5 seconds")
     shell.openTab("/setup")
-    shell.exit()
 end
 
 function Main()

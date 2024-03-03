@@ -1,6 +1,5 @@
 -- This function will show a progress bar
 function ShowProgressBar(done, total)
-
     -- Check if the amount done is bigger than the total
     if done > total then
         print("The amount of done cannot be bigger than the total amount")
@@ -19,11 +18,13 @@ function ShowProgressBar(done, total)
 
     -- Loop over the amount of hashtags and add them to the string
     for _ = 1, num_hashtags do
+        term.setTextColor(colors.green)
         final_string = final_string .. "#"
     end
 
     -- Same thing for the dashes
     for _ = 1, num_dashes do
+        term.setTextColor(colors.yellow)
         final_string = final_string .. "-"
     end
 
