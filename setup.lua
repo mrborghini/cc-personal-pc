@@ -109,7 +109,7 @@ function Main()
 
     GetGitFolder(utilsurl, "utils") -- Download all the files in the utils folder
 
-    print("Done! Please hold Ctrl R or press the restart button")
+    print("\nDone! Please hold Ctrl R or press the restart button")
 
     CleanUp() -- Remove the setup script
 end

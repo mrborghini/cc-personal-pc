@@ -14,7 +14,7 @@ end
 
 function ApplyUpdate()
     shell.openTab("wget https://raw.githubusercontent.com/lamborghinigamer1/cc-personal-pc/master/setup.lua")
-    shell.run("/setup")
+    shell.openTab("/setup")
 end
 
 function Main()
