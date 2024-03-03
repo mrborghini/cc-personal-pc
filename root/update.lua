@@ -25,7 +25,7 @@ function Main()
 
     local response = read()
 
-    string.lower(response)
+    response = string.lower(response)
 
     if response == "y" or response == "yes" then
         print("Updating...")
