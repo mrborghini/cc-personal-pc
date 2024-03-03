@@ -56,9 +56,9 @@ end
 function DownloadFile(url, folder)
     local filename = url:match("([^/]+)$")
     if folder == nil then
-        shell.run("wget " .. url)
+        shell.openTab("wget " .. url)
     else
-        shell.run("wget " .. url .. " " .. folder .. "/" .. filename)
+        shell.openTab("wget " .. url .. " " .. folder .. "/" .. filename)
     end
 end
 
