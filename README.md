@@ -21,4 +21,5 @@ in the CC Tweaked shell
 ```sh
 setup
 ``` 
-Once it's done installing you need to reboot the minecraft computer
+Once it's done installing you need to reboot the minecraft ![2024-03-03_23 00 04](https://github.com/lamborghinigamer1/cc-personal-pc/assets/61702082/92b2a485-cd3d-422f-bd11-39af1e932651)
+computer
