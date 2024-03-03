@@ -1,5 +1,11 @@
 -- This function will show a progress bar
 function showProgressBar(done, total)
+
+    -- Check if the amount done is bigger than the total
+    if done > total then
+        print("The amount of done cannot be bigger than the total amount")
+        return
+    end
     local length = 16 -- This is the length of the bar
     -- calculate the percentage
     local percentage = math.floor(done / total * 100)
@@ -33,21 +39,3 @@ function showProgressBar(done, total)
     -- Show the progress bar
     write("[" .. final_string .. "]")
 end
-
-function main()
-    if not arg[1] == nil then
-        local operation = arg[1]
-        if operation == "-help" then
-            print("Usage: progress -show <number_done> <number_total>")
-        elseif operation == "-show" then
-            if arg[2] == nil or arg[3] == nil then
-                print("Usage: progress -show <number_done> <number_total>")
-            else
-                print("")
-                showProgressBar(arg[2], arg[3])
-            end
-        end
-    end
-end
-
-main()

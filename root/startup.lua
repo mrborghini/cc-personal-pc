@@ -7,6 +7,8 @@ function Main()
     require("/alias")
 
     -- Run the commands on startup
+    shell.run("startanim")
+    print()
     shell.run("ascii")
     print()
     shell.run("quote")
