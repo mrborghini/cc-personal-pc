@@ -86,11 +86,19 @@ function GetGitFolder(url, folder)
     end
 end
 
+function DeleteUpdateTool()
+    if io.open("/update.lua") ~= nil then
+        shell.run("rm /update.lua")
+    end
+    io.close()
+end
+
 function CleanUp()
     shell.run("rm /setup.lua")
 end
 
 function Main()
+    DeleteUpdateTool() -- Delete the current update tool if it exists
     local rooturl = "https://api.github.com/repos/lamborghinigamer1/cc-personal-pc/contents/root?ref=master"
     local utilsurl = "https://api.github.com/repos/lamborghinigamer1/cc-personal-pc/contents/root/utils?ref=master"
 
@@ -99,6 +107,8 @@ function Main()
     shell.run("mkdir utils") -- Create a utils folder if it doesn't exist
 
     GetGitFolder(utilsurl, "utils") -- Download all the files in the utils folder
+
+    print("Done! Please hold Ctrl R or press the restart button")
 
     CleanUp() -- Remove the setup script
 end
