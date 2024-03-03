@@ -17,7 +17,9 @@ function Main()
 
     local quote = textutils.unserialiseJSON(result)
 
+    term.setTextColor(colors.cyan)
     print(quote.content .. " --" .. quote.author)
+    term.setTextColor(colors.white)
 end
 
 Main()
