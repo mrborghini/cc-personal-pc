@@ -27,7 +27,7 @@ function Main()
 
     string.lower(response)
 
-    if response ~= "y" or response ~= "yes" then
+    if response == "y" or response == "yes" then
         print("Updating...")
         DeleteCurrent()
         ApplyUpdate()
