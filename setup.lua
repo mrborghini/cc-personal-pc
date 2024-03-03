@@ -17,16 +17,14 @@ local function showProgressBar(done, total)
 
     -- Loop over the amount of hashtags and add them to the string
     for _ = 1, num_hashtags do
-        term.setTextColor(color.green)
+        term.setTextColor(colors.green)
         final_string = final_string .. "#"
-        term.setTextColor(color.reset)
     end
 
     -- Same thing for the dashes
     for _ = 1, num_dashes do
-        term.setTextColor(color.yellow)
+        term.setTextColor(colors.yellow)
         final_string = final_string .. "-"
-        term.setTextColor(color.reset)
     end
 
     -- Clear the current line the cursor is on
