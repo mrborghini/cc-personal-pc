@@ -84,6 +84,7 @@ function GetGitFolder(url, folder)
         -- Show the progress bar
         showProgressBar(i, #root_files)
     end
+    print() -- Ad extra line to prevent weird stuff because of the progress bar
 end
 
 function DeleteUpdateTool()
