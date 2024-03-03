@@ -1,4 +1,4 @@
-function showProgressBar(done, total)
+local function showProgressBar(done, total)
     -- Check if the amount done is bigger than the total
     if done > total then
         print("The amount of done cannot be bigger than the total amount")
@@ -53,15 +53,22 @@ function FetchApi(url)
     return result
 end
 
-function DownloadFile(url, folder)
+function DownloadFile(url, directory)
     local filename = url:match("([^/]+)$")
-    if folder == nil then
-        shell.openTab("wget " .. url)
-    else
-        shell.openTab("wget " .. url .. " " .. folder .. "/" .. filename)
+
+    if directory == nil then
+        directory = "./"
+    end
+
+    local request = http.get(url)
+
+    if request then
+        local file = fs.open(directory .. "/" .. filename, "w")
+        file.write(request.readAll())
+
+        file.close()
     end
 end
-
 
 function GetGitFolder(url, folder)
     local root_files = FetchApi(url)
@@ -73,7 +80,7 @@ function GetGitFolder(url, folder)
 
     for i = 1, #root_files do
         local file = root_files[i].download_url
-        
+
         -- print(file) -- for debugging purposes
 
         -- Download the file is the link is not nil
@@ -89,13 +96,13 @@ end
 
 function DeleteUpdateTool()
     if io.open("/update.lua") ~= nil then
-        shell.run("rm /update.lua")
+        fs.delete("/update.lua")
     end
     io.close()
 end
 
 function CleanUp()
-    shell.run("rm /setup.lua")
+    fs.delete("/setup.lua")
 end
 
 function Main()
@@ -103,9 +110,9 @@ function Main()
     local rooturl = "https://api.github.com/repos/lamborghinigamer1/cc-personal-pc/contents/root?ref=master"
     local utilsurl = "https://api.github.com/repos/lamborghinigamer1/cc-personal-pc/contents/root/utils?ref=master"
 
-    GetGitFolder(rooturl) -- Get the root folder
+    GetGitFolder(rooturl)           -- Get the root folder
 
-    shell.run("mkdir utils") -- Create a utils folder if it doesn't exist
+    fs.makeDir("/utils")        -- Create a utils folder if it doesn't exist
 
     GetGitFolder(utilsurl, "utils") -- Download all the files in the utils folder
 

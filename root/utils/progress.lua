@@ -1,5 +1,5 @@
 -- This function will show a progress bar
-function showProgressBar(done, total)
+function ShowProgressBar(done, total)
 
     -- Check if the amount done is bigger than the total
     if done > total then

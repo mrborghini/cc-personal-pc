@@ -1,20 +1,23 @@
+require("/utils/downloadfile")
+
 function DeleteCurrent()
     -- All the files in the root that need to be removed
     local files = { "/startup.lua", "/alias.lua" }
     local directory = "/utils"
 
-
-    shell.run("rm " .. directory) -- Remove directory
+    fs.delete("rm " .. directory) -- Remove directory
 
     -- Remove the files in the root
     for i = 1, #files do
-        shell.run("rm " .. files[i])
+        fs.delete(files[i])
     end
 end
 
 function ApplyUpdate()
-    shell.run("wget https://raw.githubusercontent.com/lamborghinigamer1/cc-personal-pc/master/setup.lua")
-    shell.run("/setup")
+    DownloadFile("https://raw.githubusercontent.com/lamborghinigamer1/cc-personal-pc/master/setup.lua", "/")
+    print("Waiting 5 seconds")
+    shell.openTab("/setup")
+    shell.exit()
 end
 
 function Main()
