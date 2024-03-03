@@ -30,6 +30,7 @@ function Main()
     if response ~= "y" or response ~= "yes" then
         print("Updating...")
         DeleteCurrent()
+        ApplyUpdate()
     else
         print("Update cancelled")
         return
