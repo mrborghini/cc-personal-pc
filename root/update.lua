@@ -13,7 +13,7 @@ function DeleteCurrent()
 end
 
 function ApplyUpdate()
-    shell.open("wget https://raw.githubusercontent.com/lamborghinigamer1/cc-personal-pc/master/setup.lua")
+    shell.run("wget https://raw.githubusercontent.com/lamborghinigamer1/cc-personal-pc/master/setup.lua")
     shell.run("/setup")
 end
 
