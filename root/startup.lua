@@ -13,7 +13,7 @@ function Main()
     print()
     shell.run("ascii")
     print()
-    shell.run("quote")
+    shell.run("quote", "--no-eye-candy")
 end
 
 Main()

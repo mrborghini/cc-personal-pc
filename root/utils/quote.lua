@@ -18,7 +18,18 @@ function Main()
     local quote = textutils.unserialiseJSON(result)
 
     term.setTextColor(colors.cyan)
-    print(quote.content .. " --" .. quote.author)
+    local quotestring = quote.content .. " --" .. quote.author;
+
+    if arg[1] ~= "--no-eye-candy" then
+        for i = 1, #quotestring, 1 do
+            write(string.sub(quotestring, i, i))
+            sleep(0.0005)
+        end
+        print();
+    else
+        print(quotestring)
+    end
+
     term.setTextColor(colors.white)
 end
 
