@@ -1,3 +1,8 @@
+local function checkIfCommandPc()
+    local status, typeResult = pcall(function() return type(_G["commands.exec"]) end)
+    return status and typeResult == "function"
+end
+
 local function showProgressBar(done, total)
     -- Check if the amount done is bigger than the total
     if done > total then
@@ -114,13 +119,16 @@ function Main()
 
     GetGitFolder(rooturl)           -- Get the root folder
 
-    fs.makeDir("/utils")        -- Create a utils folder if it doesn't exist
+    fs.makeDir("/utils")            -- Create a utils folder if it doesn't exist
 
     GetGitFolder(utilsurl, "utils") -- Download all the files in the utils folder
 
     print("\nDone! Please hold Ctrl R or press the restart button")
 
     CleanUp() -- Remove the setup script
+    if not checkIfCommandPc() then
+        fs.delete("randommobspawner.lua")
+    end
     os.reboot()
 end
 

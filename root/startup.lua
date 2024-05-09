@@ -1,7 +1,9 @@
 function Main()
     -- Clear the default motd
-    term.clear()
     term.setCursorPos(1, 1)
+    term.setBackgroundColor(32768)
+    term.setTextColor(1)
+    term.clear()
 
     -- Set aliases
     require("/alias")
