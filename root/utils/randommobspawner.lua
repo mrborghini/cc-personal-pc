@@ -44,7 +44,10 @@ function Main()
     local chance_commands = {}
     local created_commands = {}
     local mobs = {
+        "allay",
+        "axolotl",
         "bat",
+        "bee",
         "blaze",
         "camel",
         "cat",
@@ -57,16 +60,19 @@ function Main()
         "donkey",
         "drowned",
         "elder_guardian",
-        --"ender_dragon",
+        "ender_dragon",
         "enderman",
         "endermite",
         "evoker",
         "experience_bottle",
         "experience_orb",
         "fox",
+        "frog",
         "ghast",
         "giant",
+        "glow_squid",
         "guardian",
+        "goat",
         "hoglin",
         "horse",
         "husk",
@@ -101,6 +107,7 @@ function Main()
         "squid",
         "stray",
         "strider",
+        "tadpole",
         "trader_llama",
         "tropical_fish",
         "turtle",
@@ -190,6 +197,27 @@ while true do
         print("Sorry this is not a command pc. Please use /give @s computercraft:computer_command.")
         break
     end
+
+    write("This will break your world by spawning a lot of mobs. Are you sure? (y/n): ")
+
+    local response = read()
+
+    response = string.lower(response)
+
+    if response ~= "y" or response ~= "yes" then
+        break
+    end
+
+    write("Are you 100% sure? (y/n): ")
+
+    local confirmation = read()
+
+    confirmation = string.lower(confirmation)
+
+    if confirmation ~= "y" or confirmation ~= "yes" then
+        break
+    end
+
     run_command("weather thunder 120s")
     Main()
     show_output("Restarting in 5 minutes :)")
