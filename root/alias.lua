@@ -5,6 +5,7 @@ function Main()
     shell.setAlias("quote", "/utils/quote.lua") -- A random quote
     shell.setAlias("startanim", "/utils/startanim.lua") -- Startup animation
     shell.setAlias("update", "/update.lua") -- Update tool
+    shell.setAlias("randommobspawner", "/utils/randommobspawner.lua")
 end
 
 Main()
