@@ -186,7 +186,7 @@ function Main()
 end
 
 while true do
-    if checkIfCommandPc() then
+    if not checkIfCommandPc() then
         print("Sorry this is not a command pc. Please use /give @s computercraft:computer_command.")
         break
     end
