@@ -191,34 +191,36 @@ function Main()
     show_output(mostSpawns.mob .. " spawned the most with " .. mostSpawns.count .. " (" .. mostSpawns.percentage .. "%)")
 end
 
+
+-- Logic for checking certain information
+if not checkIfCommandPc() then
+    print("Sorry this is not a command pc. Please use /give @s computercraft:computer_command.")
+    return
+end
+
+write("This will break your world by spawning a lot of mobs. Are you sure? (y/n): ")
+
+local response = read()
+
+response = string.lower(response)
+
+if response ~= "y" and response ~= "yes" then
+    print("Cancelled")
+    return
+end
+
+write("Are you 100% sure? (y/n): ")
+
+local confirmation = read()
+
+confirmation = string.lower(confirmation)
+
+if confirmation ~= "y" and confirmation ~= "yes" then
+    print("Cancelled")
+    return
+end
+
 while true do
-    if not checkIfCommandPc() then
-        print("Sorry this is not a command pc. Please use /give @s computercraft:computer_command.")
-        break
-    end
-
-    write("This will break your world by spawning a lot of mobs. Are you sure? (y/n): ")
-
-    local response = read()
-
-    response = string.lower(response)
-
-    if response ~= "y" and response ~= "yes" then
-        print("Cancelled")
-        break
-    end
-
-    write("Are you 100% sure? (y/n): ")
-
-    local confirmation = read()
-
-    confirmation = string.lower(confirmation)
-
-    if confirmation ~= "y" and confirmation ~= "yes" then
-        print("Cancelled")
-        break
-    end
-
     run_command("weather thunder 120s")
     Main()
     show_output("Restarting in 5 minutes :)")
