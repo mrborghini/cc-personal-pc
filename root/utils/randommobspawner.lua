@@ -203,7 +203,8 @@ while true do
 
     response = string.lower(response)
 
-    if response ~= "y" or response ~= "yes" then
+    if response ~= "y" and response ~= "yes" then
+        print("Cancelled")
         break
     end
 
@@ -213,7 +214,8 @@ while true do
 
     confirmation = string.lower(confirmation)
 
-    if confirmation ~= "y" or confirmation ~= "yes" then
+    if confirmation ~= "y" and confirmation ~= "yes" then
+        print("Cancelled")
         break
     end
 
