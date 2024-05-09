@@ -1,6 +1,5 @@
 local function checkIfCommandPc()
-    local status, typeResult = pcall(function() return type(_G["commands.exec"]) end)
-    return status and typeResult == "function"
+    return type(commands) == "table" and type(commands.exec) == "function"
 end
 
 local function randomWithPercentage(percentage)
