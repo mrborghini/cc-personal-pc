@@ -1,3 +1,8 @@
+local function checkIfCommandPc()
+    local status, typeResult = pcall(function() return type(_G["commands.exec"]) end)
+    return status and typeResult == "function"
+end
+
 local function randomWithPercentage(percentage)
     local randomValue = math.random(1, 100)
     return randomValue <= percentage
@@ -181,6 +186,10 @@ function Main()
 end
 
 while true do
+    if checkIfCommandPc() then
+        print("Sorry this is not a command pc. Please use /give @s computercraft:computer_command.")
+        break
+    end
     run_command("weather thunder 120s")
     Main()
     show_output("Restarting in 5 minutes :)")
