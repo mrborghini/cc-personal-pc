@@ -2,7 +2,7 @@
 require("/utils/apifetcher")
 require("/utils/customsyntax")
 function Main()
-    local url = "https://api.quotable.io/random"
+    local url = "http://api.quotable.io/random"
 
     -- Fetch
     local result = FetchApi(url)
