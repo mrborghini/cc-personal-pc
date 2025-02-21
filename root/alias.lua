@@ -6,6 +6,7 @@ function Main()
     shell.setAlias("startanim", "/utils/startanim.lua") -- Startup animation
     shell.setAlias("update", "/update.lua") -- Update tool
     shell.setAlias("randommobspawner", "/utils/randommobspawner.lua")
+    shell.setAlias("curl", "/utils/curl.lua")
 end
 
 Main()
