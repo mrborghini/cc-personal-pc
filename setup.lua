@@ -109,8 +109,8 @@ end
 
 function Main()
     DeleteUpdateTool() -- Delete the current update tool if it exists
-    local rooturl = "https://api.github.com/repos/lamborghinigamer1/cc-personal-pc/contents/root?ref=master"
-    local utilsurl = "https://api.github.com/repos/lamborghinigamer1/cc-personal-pc/contents/root/utils?ref=master"
+    local rooturl = "https://api.github.com/repos/mrborghini/cc-personal-pc/contents/root?ref=master"
+    local utilsurl = "https://api.github.com/repos/mrborghini/cc-personal-pc/contents/root/utils?ref=master"
 
     GetGitFolder(rooturl)           -- Get the root folder
 

@@ -14,7 +14,7 @@ function DeleteCurrent()
 end
 
 function ApplyUpdate()
-    DownloadFile("https://raw.githubusercontent.com/lamborghinigamer1/cc-personal-pc/master/setup.lua", "/")
+    DownloadFile("https://raw.githubusercontent.com/mrborghini/cc-personal-pc/master/setup.lua", "/")
     print("Waiting 5 seconds")
     shell.openTab("/setup")
 end
