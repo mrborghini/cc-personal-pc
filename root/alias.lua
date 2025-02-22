@@ -7,6 +7,7 @@ function Main()
     shell.setAlias("update", "/update.lua") -- Update tool
     shell.setAlias("randommobspawner", "/utils/randommobspawner.lua")
     shell.setAlias("curl", "/utils/curl.lua")
+    shell.setAlias("twitch", "/utils/twitch.lua")
 end
 
 Main()

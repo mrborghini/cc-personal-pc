@@ -1,5 +1,5 @@
 local function main()
-    local url = "http://opportunities-dt.gl.at.ply.gg:20913/realtime"
+    local url = "ws://opportunities-dt.gl.at.ply.gg:20913/realtime"
     local ws = assert(http.websocket(url))
 
     local username = arg[1]
