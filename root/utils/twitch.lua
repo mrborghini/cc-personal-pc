@@ -14,15 +14,9 @@ local function main()
         metadata = username
     }
 
-    print(textutils.serialiseJSON(wsdata))
     ws.send(wsdata)
 
-    local colors = {}
-    for key in pairs(colors) do
-        table.insert(colors, key)
-    end
     local users = {}
-
 
     while true do
         local data, _ = ws.receive()
@@ -31,7 +25,7 @@ local function main()
         local color = colors.red
         local found = false
         for i = 1, #users, 1 do
-            if twitch_message.user == users[i] then
+            if twitch_message.user == users[i].user then
                 found = true
                 color = users[i].color
             end
