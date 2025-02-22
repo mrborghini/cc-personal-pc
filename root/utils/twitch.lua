@@ -14,35 +14,58 @@ local function main()
         metadata = username
     }
 
-    ws.send(wsdata)
+    ws_data_serialized = textutils.serialiseJSON(wsdata)
+
+    ws.send(ws_data_serialized)
 
     local users = {}
+    local selected_colors = {
+        colors.orange,
+        colors.magenta,
+        colors.lightBlue,
+        colors.yellow,
+        colors.lime,
+        colors.pink,
+        colors.gray,
+        colors.lightGray,
+        colors.cyan,
+        colors.purple,
+        colors.blue,
+        colors.green,
+        colors.red
+    }
+
+    print("Successfully connected to ttv/" .. username)
 
     while true do
         local data, _ = ws.receive()
         local twitch_message = textutils.unserialiseJSON(data)
 
-        local color = colors.red
-        local found = false
-        for i = 1, #users, 1 do
-            if twitch_message.user == users[i].user then
-                found = true
-                color = users[i].color
+        if twitch_message.user ~= nil then
+            local selected_color = selected_colors[1]
+
+            local found = false
+            for i = 1, #users, 1 do
+                if twitch_message.user == users[i].user then
+                    found = true
+                    selected_color = users[i].user_color
+                end
             end
-        end
 
-        if not found then
-            color = colors[math.random(#colors)]
-            table.insert(users, {
-                user = twitch_message.user,
-                color = color
-            })
-        end
+            if not found then
+                selected_color = selected_colors[math.random(#selected_colors)]
+                table.insert(users, {
+                    user = twitch_message.user,
+                    user_color = selected_color
+                })
+            end
 
-        term.setTextColor(color)
-        write(twitch_message.user)
-        term.setTextColor(colors.white)
-        write(": " .. twitch_message.message)
+            term.setTextColor(selected_color)
+            write(twitch_message.user)
+            term.setTextColor(colors.white)
+            write(": " .. twitch_message.message)
+            print()
+        end
     end
 end
 
