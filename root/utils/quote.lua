@@ -2,15 +2,15 @@
 require("/utils/apifetcher")
 require("/utils/customsyntax")
 function Main()
-    local url = "http://api.quotable.io/random"
-
+    local url = "http://opportunities-dt.gl.at.ply.gg:20913/quote"
+    
     -- Fetch
     local result = FetchApi(url)
 
     local quote = textutils.unserialiseJSON(result)
 
     term.setTextColor(colors.cyan)
-    local quotestring = quote.content .. " --" .. quote.author;
+    local quotestring = quote.message;
 
     if arg[1] == "--no-eye-candy" then
         print(quotestring)
