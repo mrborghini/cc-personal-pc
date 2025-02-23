@@ -1,6 +1,24 @@
-local function main()
+local function connect()
     local url = "ws://opportunities-dt.gl.at.ply.gg:20913/realtime"
-    local ws = assert(http.websocket(url))
+    local ws
+    local retries = 5
+
+    while retries > 0 do
+        ws = http.websocket(url)
+        if ws then
+            return ws
+        else
+            print("Failed to connect, retrying in 5 seconds...")
+            sleep(5)
+            retries = retries - 1
+        end
+    end
+
+    error("Failed to connect after multiple attempts")
+end
+
+local function main()
+    local ws = connect()
 
     local username = arg[1]
 
@@ -69,6 +87,10 @@ local function main()
                     print()
                 end
             end
+        else
+            print("Connection lost, attempting to reconnect...")
+            ws = connect()
+            ws.send(ws_data_serialized)
         end
     end
 end
