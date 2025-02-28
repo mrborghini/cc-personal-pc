@@ -6,7 +6,7 @@ local function main()
 
     if area_str == nil or depth_str == nil then
         print(
-        "Mines an area completely. Area means 'width' and 'length'. 'depth' is how deep. Please note you must use a mining turtle.")
+            "Mines an area completely. Area means 'width' and 'length'. 'depth' is how deep. Please note you must use a mining turtle.")
         print("Usage: mine area depth")
         return
     end
@@ -67,6 +67,7 @@ local function main()
         ProgressBar(mined_blocks, total_blocks)
         ::continue::
     end
+    LookLeft() -- Turn again to make it easier to mine again
     mined_blocks = mined_blocks + 1
     ProgressBar(mined_blocks, total_blocks)
     print()
