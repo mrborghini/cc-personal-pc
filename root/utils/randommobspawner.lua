@@ -191,7 +191,6 @@ function Main()
     show_output(mostSpawns.mob .. " spawned the most with " .. mostSpawns.count .. " (" .. mostSpawns.percentage .. "%)")
 end
 
-
 -- Logic for checking certain information
 if not checkIfCommandPc() then
     print("Sorry this is not a command pc. Please use /give @s computercraft:computer_command.")
