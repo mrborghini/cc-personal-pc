@@ -5,8 +5,14 @@ local function main()
     local depth_str = arg[2]
 
     if area_str == nil or depth_str == nil then
-        print("Mines an area completely. Area means 'width' and 'length'. 'depth' is how deep. Please note you must use a mining turtle.")
+        print(
+        "Mines an area completely. Area means 'width' and 'length'. 'depth' is how deep. Please note you must use a mining turtle.")
         print("Usage: mine area depth")
+        return
+    end
+
+    if turtle == nil then
+        print("This is not a mining turtle")
         return
     end
 
