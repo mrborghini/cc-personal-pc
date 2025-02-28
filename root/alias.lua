@@ -9,6 +9,7 @@ function Main()
     shell.setAlias("curl", "/utils/curl.lua")
     shell.setAlias("twitch", "/utils/twitch.lua")
     shell.setAlias("mine", "/utils/mine.lua")
+    shell.setAlias("fill_mode", "/utils/fill_mode.lua")
 end
 
 Main()
