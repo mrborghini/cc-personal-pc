@@ -45,8 +45,7 @@ function ProgressBar(current, total)
         progress_bar_string = progress_bar_string .. "-"
     end
 
-    progress_bar_string = progress_bar_string .. "]"
-    progress_bar_string = progress_bar_string .. "(" .. current .. "/" .. total .. ") " .. math.floor(percentage) .. "%"
+    progress_bar_string = progress_bar_string .. "](" .. current .. "/" .. total .. ") " .. math.floor(percentage) .. "%"
     local _, y = term.getCursorPos()
     term.setCursorPos(1, y)
     write(progress_bar_string)
