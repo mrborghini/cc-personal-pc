@@ -18,14 +18,13 @@ local function connect()
 end
 
 local function main()
-    local ws = connect()
-
     local username = arg[1]
-
     if username == nil or username == "" then
         print("Please provide a twitch username")
         return
     end
+    
+    local ws = connect()
 
     local wsdata = {
         subscribe = 1,
