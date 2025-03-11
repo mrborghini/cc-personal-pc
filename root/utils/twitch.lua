@@ -1,3 +1,5 @@
+require("lambo_data_api_types")
+
 local function connect()
     local url = "ws://opportunities-dt.gl.at.ply.gg:20913/realtime"
     local ws
@@ -23,7 +25,7 @@ local function main()
         print("Please provide a twitch username")
         return
     end
-    
+
     local ws = connect()
 
     local wsdata = {
@@ -57,7 +59,13 @@ local function main()
     while true do
         local data, _ = ws.receive()
         if data ~= nil then
-            local twitch_message = textutils.unserialiseJSON(data)
+            local api_response = textutils.unserialiseJSON(data)
+
+            if not SubscriptionEvent[api_response.subscription_type] == "twitchSubscription" then
+                goto continue
+            end
+
+            local twitch_message = textutils.unserialiseJSON(api_response.message)
 
             if twitch_message ~= nil then
                 if twitch_message.user ~= nil then
@@ -91,6 +99,7 @@ local function main()
             ws = connect()
             ws.send(ws_data_serialized)
         end
+        ::continue::
     end
 end
 
