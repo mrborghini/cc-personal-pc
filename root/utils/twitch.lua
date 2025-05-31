@@ -1,7 +1,8 @@
 require("lambo_data_api_types")
+require("utils")
 
 local function connect()
-    local url = "ws://opportunities-dt.gl.at.ply.gg:20913/realtime"
+    local url = "ws://" .. SERVER_URL .. "/realtime"
     local ws
     local retries = 5
 

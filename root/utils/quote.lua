@@ -2,7 +2,7 @@
 require("/utils/apifetcher")
 require("/utils/customsyntax")
 function Main()
-    local url = "http://opportunities-dt.gl.at.ply.gg:20913/quote"
+    local url = "http://" .. SERVER_URL .."/quote"
     
     -- Fetch
     local result = FetchApi(url)
