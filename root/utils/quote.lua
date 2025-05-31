@@ -1,6 +1,7 @@
 -- This program fetches random quotes from https://api.quotable.io/random
 require("/utils/apifetcher")
 require("/utils/customsyntax")
+require("utils")
 function Main()
     local url = "http://" .. SERVER_URL .."/quote"
     
