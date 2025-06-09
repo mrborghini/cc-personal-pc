@@ -2,10 +2,11 @@ require("utils")
 require("lambo_data_api_types")
 
 local flipped = false
+local ws
+local channel
 
 local function connect()
     local url = "ws://" .. SERVER_URL .. "/realtime"
-    local ws
     local retries = 5
 
     while retries > 0 do
@@ -24,29 +25,13 @@ end
 
 local function toggleRedstone()
     flipped = not flipped
-
-    redstone.setOutput("back", flipped)
-    redstone.setOutput("top", flipped)
-    redstone.setOutput("left", flipped)
-    redstone.setOutput("right", flipped)
-    redstone.setOutput("bottom", flipped)
-    redstone.setOutput("front", flipped)
+    for _, side in ipairs({"back", "top", "left", "right", "bottom", "front"}) do
+        redstone.setOutput(side, flipped)
+    end
 end
 
-local function main()
-    local listenerMode = false
-    local channel = arg[2]
-    if arg[1] == "--listen" then
-        listenerMode = true
-    end
-
-    if channel == nil then
-        print("Please provide a channel name at the end of the command.")
-        return
-    end
-
-    local ws = connect()
-
+-- Thread 1: Main listener loop
+local function listenLoop()
     local wsdata = {
         subscribe = 2,
         metadata = channel
@@ -55,7 +40,7 @@ local function main()
     ws.send(wsDataSerialized)
 
     while true do
-        local data, _ = ws.receive()
+        local data = ws.receive()
         print(data)
 
         if data == nil then
@@ -65,17 +50,48 @@ local function main()
         end
 
         local api_response = textutils.unserialiseJSON(data)
-
-        if not SubscriptionEvent[api_response.subscription_type] == "chat" then
+        if SubscriptionEvent[api_response.subscription_type] ~= "chat" then
             goto continue
         end
 
-        if SubscriptionEvent["message"] == "toggle" and listenerMode == true then
+        if api_response["message"] == "toggle" then
             toggleRedstone()
         end
 
         ::continue::
     end
+end
+
+-- Thread 2: Redstone monitoring loop
+local function redstoneMonitorLoop()
+    while true do
+        for _, side in ipairs({"back", "top", "left", "right", "bottom", "front"}) do
+            if redstone.getInput(side) then
+                local message = {
+                    subscribe = 3,
+                    metadata = channel .. ":toggle"
+                }
+                ws.send(textutils.serialiseJSON(message))
+                sleep(1)  -- debounce delay
+                break
+            end
+        end
+        sleep(0.1)
+    end
+end
+
+-- Main entry
+local function main()
+    channel = arg[2]
+
+    if channel == nil then
+        print("Please provide a channel name at the end of the command.")
+        return
+    end
+
+    ws = connect()
+
+    parallel.waitForAny(listenLoop, redstoneMonitorLoop)
 end
 
 main()
