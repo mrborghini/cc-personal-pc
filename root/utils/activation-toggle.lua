@@ -25,7 +25,7 @@ end
 
 local function toggleRedstone()
     flipped = not flipped
-    for _, side in ipairs({"back", "top", "left", "right", "bottom", "front"}) do
+    for _, side in ipairs({"back"}) do
         redstone.setOutput(side, flipped)
     end
 end
