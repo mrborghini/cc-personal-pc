@@ -10,7 +10,7 @@ function Main()
 
     -- Run the commands on startup
     shell.run("utils/update-update-tool.lua")
-    
+
     shell.run("startanim")
     print()
     shell.run("ascii")
