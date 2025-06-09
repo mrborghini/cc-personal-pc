@@ -70,7 +70,7 @@ local function main()
             goto continue
         end
 
-        if listenerMode then
+        if SubscriptionEvent["message"] == "toggle" and listenerMode == true then
             toggleRedstone()
         end
 
