@@ -1,5 +1,5 @@
-require("lambo_data_api_types")
 require("utils")
+require("lambo-data-api-types")
 
 local function connect()
     local url = "ws://" .. SERVER_URL .. "/realtime"
@@ -34,12 +34,12 @@ local function main()
         metadata = username
     }
 
-    local ws_data_serialized = textutils.serialiseJSON(wsdata)
+    local wsDataSerialized = textutils.serialiseJSON(wsdata)
 
-    ws.send(ws_data_serialized)
+    ws.send(wsDataSerialized)
 
     local users = {}
-    local selected_colors = {
+    local selectedColors = {
         colors.orange,
         colors.magenta,
         colors.lightBlue,
@@ -60,45 +60,45 @@ local function main()
     while true do
         local data, _ = ws.receive()
         if data ~= nil then
-            local api_response = textutils.unserialiseJSON(data)
+            local apiResponse = textutils.unserialiseJSON(data)
 
-            if not SubscriptionEvent[api_response.subscription_type] == "twitchSubscription" then
+            if not SubscriptionEvent[apiResponse["subscription_type"]] == "twitchSubscription" then
                 goto continue
             end
 
-            local twitch_message = textutils.unserialiseJSON(api_response.message)
+            local twitchMessage = textutils.unserialiseJSON(apiResponse["message"])
 
-            if twitch_message ~= nil then
-                if twitch_message.user ~= nil then
-                    local selected_color = selected_colors[1]
+            if twitchMessage ~= nil then
+                if twitchMessage.user ~= nil then
+                    local selectedColor = selectedColors[1]
 
                     local found = false
                     for i = 1, #users, 1 do
-                        if twitch_message.user == users[i].user then
+                        if twitchMessage.user == users[i].user then
                             found = true
-                            selected_color = users[i].user_color
+                            selectedColor = users[i].user_color
                         end
                     end
 
                     if not found then
-                        selected_color = selected_colors[math.random(#selected_colors)]
+                        selectedColor = selectedColors[math.random(#selectedColors)]
                         table.insert(users, {
-                            user = twitch_message.user,
-                            user_color = selected_color
+                            user = twitchMessage.user,
+                            userColor = selectedColor
                         })
                     end
 
-                    term.setTextColor(selected_color)
-                    write(twitch_message.user)
+                    term.setTextColor(selectedColor)
+                    write(twitchMessage.user)
                     term.setTextColor(colors.white)
-                    write(": " .. twitch_message.message)
+                    write(": " .. twitchMessage.message)
                     print()
                 end
             end
         else
             print("Connection lost, attempting to reconnect...")
             ws = connect()
-            ws.send(ws_data_serialized)
+            ws.send(wsDataSerialized)
         end
         ::continue::
     end

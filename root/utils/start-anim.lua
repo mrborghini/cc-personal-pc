@@ -1,6 +1,6 @@
-require("/utils/progress")
+require("utils")
 
-function Main()
+local function main()
     term.setTextColor(colors.yellow)
     local message = "Booting up\n"
 
@@ -18,4 +18,4 @@ function Main()
     term.setTextColor(colors.white)
 end
 
-Main()
+main()

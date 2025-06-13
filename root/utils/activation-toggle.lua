@@ -1,5 +1,5 @@
 require("utils")
-require("lambo_data_api_types")
+require("lambo-data-api-types")
 
 local flipped = false
 local ws
@@ -49,12 +49,12 @@ local function listenLoop()
             goto continue
         end
 
-        local api_response = textutils.unserialiseJSON(data)
-        if SubscriptionEvent[api_response.subscription_type] ~= "chat" then
+        local apiResponse = textutils.unserialiseJSON(data)
+        if SubscriptionEvent[apiResponse["subscription_type"]] ~= "chat" then
             goto continue
         end
 
-        if api_response["message"] == "toggle" then
+        if apiResponse["message"] == "toggle" then
             toggleRedstone()
         end
 

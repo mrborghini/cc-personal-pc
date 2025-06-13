@@ -1,11 +1,11 @@
-local function show_art(art)
+local function showArt(art)
     for i = 1, #art, 1 do
         print(art[i])
         sleep(0.0005)
     end
 end
 
-function Main()
+local function main()
     local art = {
         "            _                  _    _      _ ",
         "  _ __  _ _| |__  ___ _ _ __ _| |_ (_)_ _ (_)",
@@ -14,14 +14,14 @@ function Main()
         "                         |___/               "
     }
 
-    local art_small = {
+    local artSmall = {
         "  _               _         ",
         " | |   __ _ _ __ | |__  ___ ",
         " | |__/ _` | '  \\| '_ \\/ _ \\",
         " |____\\__,_|_|_|_|_.__/\\___/"
     }
 
-    local art_smallest = {
+    local artSmallest = {
         "    _           ",
         "   (_)__ _ _ _  ",
         "   | / _` | ' \\ ",
@@ -32,12 +32,12 @@ function Main()
     local width, _ = term.getSize()
 
     if width >= 45 then
-        show_art(art)
+        showArt(art)
     elseif width >= 28 then
-        show_art(art_small)
+        showArt(artSmall)
     else
-        show_art(art_smallest)
+        showArt(artSmallest)
     end
 end
 
-Main()
+main()

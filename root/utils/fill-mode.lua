@@ -5,13 +5,13 @@ local function main()
     end
 
     print("refilling...")
-    local last_capacity = turtle.getFuelLevel()
+    local lastCapacity = turtle.getFuelLevel()
     while turtle.refuel() do
         write("Current level: " .. turtle.getFuelLevel())
-        if last_capacity == turtle.getFuelLevel() then
+        if lastCapacity == turtle.getFuelLevel() then
             break
         end
-        last_capacity = turtle.getFuelLevel()
+        lastCapacity = turtle.getFuelLevel()
     end
     print()
     print("No more fuel in slot or max capacity has been reached.")

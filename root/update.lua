@@ -1,25 +1,11 @@
-require("/utils/downloadfile")
-
-function DeleteCurrent()
-    -- All the files in the root that need to be removed
-    local files = { "/startup.lua", "/alias.lua" }
-    local directory = "/utils"
-
-    fs.delete("rm " .. directory) -- Remove directory
-
-    -- Remove the files in the root
-    for i = 1, #files do
-        fs.delete(files[i])
-    end
-end
+require("utils")
 
 function ApplyUpdate()
     DownloadFile("https://raw.githubusercontent.com/mrborghini/cc-personal-pc/master/setup.lua", "/")
-    print("Waiting 5 seconds")
-    shell.openTab("/setup")
+    require("/setup")
 end
 
-function Main()
+function main()
     print("Welcome to the update tool")
 
     print("Are you sure you want to update?")
@@ -31,7 +17,6 @@ function Main()
 
     if response == "y" or response == "yes" then
         print("Updating...")
-        DeleteCurrent()
         ApplyUpdate()
     else
         print("Update cancelled")
@@ -39,4 +24,4 @@ function Main()
     end
 end
 
-Main()
+main()

@@ -1,7 +1,12 @@
-require("/utils/apifetcher")
+require("utils")
 
 local function main()
-    print(FetchApi(arg[1]))
+    local err, response = GetRequest(arg[1])
+    if err ~= nil then
+        print(err)
+        return
+    end
+    print(response)
 end
 
 main()

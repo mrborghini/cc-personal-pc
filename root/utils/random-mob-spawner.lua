@@ -7,13 +7,13 @@ local function randomWithPercentage(percentage)
     return randomValue <= percentage
 end
 
-local function run_command(command)
+local function runCommand(command)
     commands.exec(command)
 end
 
-local function show_output(message)
+local function showOutput(message)
     print(message)
-    run_command("say " .. message)
+    runCommand("say " .. message)
 end
 
 local function eepy(seconds)
@@ -22,26 +22,26 @@ end
 
 
 Command = {
-    command_string = "",
-    chance_in_percentage = 0.0
+    commandString = "",
+    chanceInPercentage = 0.0
 }
 
 ---constructor for Command type
 ---@param command any
----@param chance_in_percentage any
+---@param chanceInPercentage any
 ---@return table
-function Command:new(command, chance_in_percentage)
+function Command:new(command, chanceInPercentage)
     local obj = {}
     setmetatable(obj, self)
     self.__index = self
-    obj.command_string = command
-    obj.chance_in_percentage = chance_in_percentage
+    obj.commandString = command
+    obj.chanceInPercentage = chanceInPercentage
     return obj
 end
 
-function Main()
-    local chance_commands = {}
-    local created_commands = {}
+local function main()
+    local chanceCommands = {}
+    local createdCommands = {}
     local mobs = {
         "allay",
         "axolotl",
@@ -125,52 +125,52 @@ function Main()
         "zombified_piglin" }
 
     for i = 1, #mobs, 1 do
-        table.insert(created_commands, "summon " .. mobs[i] .. " ~30 ~ ~")
+        table.insert(createdCommands, "summon " .. mobs[i] .. " ~30 ~ ~")
     end
 
-    show_output("Showing all mobs and their odds...")
+    showOutput("Showing all mobs and their odds...")
     eepy(3)
 
-    for i = 1, #created_commands, 1 do
-        local random_percentage = math.random(0, 100)
-        local cmd = Command:new(created_commands[i], random_percentage)
-        table.insert(chance_commands, cmd)
-        show_output(mobs[i] .. ": " .. random_percentage .. "%")
+    for i = 1, #createdCommands, 1 do
+        local randomPercentage = math.random(0, 100)
+        local cmd = Command:new(createdCommands[i], randomPercentage)
+        table.insert(chanceCommands, cmd)
+        showOutput(mobs[i] .. ": " .. randomPercentage .. "%")
     end
 
 
     for i = 3, 1, -1 do
-        show_output("Starting in " .. i)
+        showOutput("Starting in " .. i)
         eepy(1)
     end
 
-    show_output("GOODLUCK!")
+    showOutput("GOODLUCK!")
 
     local mobCounts = {}
-    local max_mobs = 500
+    local maxMobs = 500
 
 
     local looped = 0
-    while looped < max_mobs do
+    while looped < maxMobs do
         for j = 1, #mobs, 1 do
-            print(looped > max_mobs)
-            if looped > max_mobs then
+            print(looped > maxMobs)
+            if looped > maxMobs then
                 break
             end
             local mob = mobs[j]
-            if randomWithPercentage(chance_commands[j].chance_in_percentage) then
-                show_output("Spawned " .. mob .. " (" .. looped .. "/" .. max_mobs .. ")")
-                _, _ = run_command(chance_commands[j].command_string)
+            if randomWithPercentage(chanceCommands[j].chanceInPercentage) then
+                showOutput("Spawned " .. mob .. " (" .. looped .. "/" .. maxMobs .. ")")
+                _, _ = runCommand(chanceCommands[j].commandString)
                 mobCounts[mob] = mobCounts[mob] or { count = 0, percentage = 0 }
                 mobCounts[mob].count = mobCounts[mob].count + 1
-                mobCounts[mob].percentage = chance_commands[j].chance_in_percentage
+                mobCounts[mob].percentage = chanceCommands[j].chanceInPercentage
                 looped = looped + 1
             end
         end
     end
 
     -- Display mob counts
-    show_output("Mob Counts:")
+    showOutput("Mob Counts:")
     local mostSpawns = {
         count = 0,
         mob = "",
@@ -180,7 +180,7 @@ function Main()
     for mob, data in pairs(mobCounts) do
         local count = data.count
         local percentage = data.percentage
-        show_output(mob .. ": Count: " .. count .. " (" .. percentage .. "%)")
+        showOutput(mob .. ": Count: " .. count .. " (" .. percentage .. "%)")
         if count > mostSpawns.count then
             mostSpawns.mob = mob
             mostSpawns.count = count
@@ -188,7 +188,7 @@ function Main()
         end
     end
 
-    show_output(mostSpawns.mob .. " spawned the most with " .. mostSpawns.count .. " (" .. mostSpawns.percentage .. "%)")
+    showOutput(mostSpawns.mob .. " spawned the most with " .. mostSpawns.count .. " (" .. mostSpawns.percentage .. "%)")
 end
 
 -- Logic for checking certain information
@@ -220,25 +220,25 @@ if confirmation ~= "y" and confirmation ~= "yes" then
 end
 
 while true do
-    run_command("weather thunder 120s")
-    Main()
-    show_output("Restarting in 5 minutes :)")
+    runCommand("weather thunder 120s")
+    main()
+    showOutput("Restarting in 5 minutes :)")
 
     eepy(220)
-    show_output("1 minute :)")
+    showOutput("1 minute :)")
 
     eepy(30)
-    show_output("30 seconds :D")
+    showOutput("30 seconds :D")
 
     eepy(20)
-    show_output("10 seconds")
+    showOutput("10 seconds")
 
     eepy(7)
 
     for i = 3, 1, -1 do
-        show_output(i)
+        showOutput(i)
         eepy(1)
     end
 
-    show_output("RESTARTING MHUAHAHAHA")
+    showOutput("RESTARTING MHUAHAHAHA")
 end

@@ -8,23 +8,23 @@ local function showProgressBar(done, total)
     -- calculate the percentage
     local percentage = math.floor(done / total * 100)
     -- calculate the amount of hashtags based on the percentage
-    local num_hashtags = math.floor(length * percentage / 100)
+    local numHashtags = math.floor(length * percentage / 100)
     -- Calculate the amount of dashes
-    local num_dashes = length - num_hashtags
+    local numDashes = length - numHashtags
 
     -- Store the final string
-    local final_string = ""
+    local finalString = ""
 
     -- Loop over the amount of hashtags and add them to the string
-    for _ = 1, num_hashtags do
+    for _ = 1, numHashtags do
         term.setTextColor(colors.green)
-        final_string = final_string .. "#"
+        finalString = finalString .. "#"
     end
 
     -- Same thing for the dashes
-    for _ = 1, num_dashes do
+    for _ = 1, numDashes do
         term.setTextColor(colors.yellow)
-        final_string = final_string .. "-"
+        finalString = finalString .. "-"
     end
 
     -- Clear the current line the cursor is on
@@ -37,25 +37,25 @@ local function showProgressBar(done, total)
     term.setCursorPos(1, y)
 
     -- Show the progress bar
-    write("[" .. final_string .. "]")
+    write("[" .. finalString .. "]")
 end
 
 -- This will download all the files from the root folder
-function FetchApi(url)
+local function fetchApi(url)
     local request = http.get(url)
     if request == nil then
         print("Was unable to fetch: " .. url)
         return
     end
 
-    local json_text = request.readAll()
+    local jsonText = request.readAll()
 
-    local result = textutils.unserialiseJSON(json_text)
+    local result = textutils.unserialiseJSON(jsonText)
     -- print(result) -- For debugging purposes
     return result
 end
 
-function DownloadFile(url, directory)
+local function downloadFile(url, directory)
     local filename = url:match("([^/]+)$")
 
     if directory == nil then
@@ -72,56 +72,56 @@ function DownloadFile(url, directory)
     end
 end
 
-function GetGitFolder(url, folder)
-    local root_files = FetchApi(url)
+local function getGitFolder(url, folder)
+    local rootFiles = fetchApi(url)
 
-    if root_files == nil then
+    if rootFiles == nil then
         print("Could not find files in the root of the repo")
         return
     end
 
-    for i = 1, #root_files do
-        local file = root_files[i].download_url
+    for i = 1, #rootFiles do
+        local file = rootFiles[i]["download_url"]
 
         -- print(file) -- for debugging purposes
 
         -- Download the file is the link is not nil
         if file ~= nil then
-            DownloadFile(file, folder)
+            downloadFile(file, folder)
         end
 
         -- Show the progress bar
-        showProgressBar(i, #root_files)
+        showProgressBar(i, #rootFiles)
     end
     print() -- Ad extra line to prevent weird stuff because of the progress bar
 end
 
-function DeleteUpdateTool()
+local function deleteUpdateTool()
     if io.open("/update.lua") ~= nil then
         fs.delete("/update.lua")
     end
     io.close()
 end
 
-function CleanUp()
+local function cleanUp()
     fs.delete("/setup.lua")
 end
 
-function Main()
-    DeleteUpdateTool() -- Delete the current update tool if it exists
+local function main()
+    deleteUpdateTool() -- Delete the current update tool if it exists
     local rooturl = "https://api.github.com/repos/mrborghini/cc-personal-pc/contents/root?ref=master"
     local utilsurl = "https://api.github.com/repos/mrborghini/cc-personal-pc/contents/root/utils?ref=master"
 
-    GetGitFolder(rooturl)           -- Get the root folder
+    getGitFolder(rooturl)           -- Get the root folder
 
     fs.makeDir("/utils")        -- Create a utils folder if it doesn't exist
 
-    GetGitFolder(utilsurl, "utils") -- Download all the files in the utils folder
+    getGitFolder(utilsurl, "utils") -- Download all the files in the utils folder
 
     print("\nDone! Please hold Ctrl R or press the restart button")
 
-    CleanUp() -- Remove the setup script
+    cleanUp() -- Remove the setup script
     os.reboot()
 end
 
-Main()
+main()
