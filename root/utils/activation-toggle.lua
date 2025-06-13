@@ -48,7 +48,7 @@ local function listenLoop()
             print("Connection lost")
             ws = connect()
             ws.send(wsDataSerialized)
-            break
+            goto continue
         end
 
         local apiResponse = textutils.unserialiseJSON(data)
