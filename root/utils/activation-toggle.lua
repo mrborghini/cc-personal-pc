@@ -1,4 +1,4 @@
-require("utils")
+require("/utils/utils")
 require("lambo-data-api-types")
 
 local flipped = false

@@ -1,4 +1,4 @@
-require("utils")
+require("/utils/utils")
 
 local function main()
     term.setTextColor(colors.yellow)

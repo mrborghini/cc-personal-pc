@@ -1,4 +1,4 @@
-require("utils")
+require("/utils/utils")
 require("turtle-base-functions")
 
 local function main()

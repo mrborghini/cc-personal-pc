@@ -66,6 +66,7 @@ local function main()
             local input = read()
             print(input)
         end
+        return
     end
 
     local file = io.open(filepath)

@@ -1,4 +1,4 @@
-function main()
+local function main()
     -- Clear the default motd
     term.clear()
     term.setCursorPos(1, 1)

@@ -1,5 +1,5 @@
 -- This program fetches random quotes from https://api.quotable.io/random
-require("utils")
+require("/utils/utils")
 local function main()
     local url = "http://" .. SERVER_URL .."/quote"
 
