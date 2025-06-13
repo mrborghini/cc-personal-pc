@@ -25,7 +25,7 @@ end
 
 local function toggleRedstone()
     flipped = not flipped
-    for _, side in ipairs({"back"}) do
+    for _, side in ipairs({ "back" }) do
         redstone.setOutput(side, flipped)
     end
 end
@@ -44,9 +44,10 @@ local function listenLoop()
         print(data)
 
         if data == nil then
+            print("Connection lost")
             ws = connect()
             ws.send(wsDataSerialized)
-            goto continue
+            break
         end
 
         local apiResponse = textutils.unserialiseJSON(data)
@@ -64,25 +65,33 @@ end
 
 -- Thread 2: Redstone monitoring loop
 local function redstoneMonitorLoop()
+    local previousState = {
+        back = false, top = false, left = false,
+        right = false, bottom = false, front = false
+    }
+
     while true do
-        for _, side in ipairs({"back", "top", "left", "right", "bottom", "front"}) do
-            if redstone.getInput(side) then
+        for _, side in ipairs({ "back", "top", "left", "right", "bottom", "front" }) do
+            local currentState = redstone.getInput(side)
+            if currentState and not previousState[side] then
+                -- Rising edge detected
                 local message = {
                     subscribe = 3,
                     metadata = channel .. ":toggle"
                 }
                 ws.send(textutils.serialiseJSON(message))
-                sleep(1)  -- debounce delay
-                break
+                print("Toggling...")
             end
+            previousState[side] = currentState
         end
-        sleep(0.1)
+        sleep(0.1) -- shorter sleep to improve responsiveness
     end
 end
 
+
 -- Main entry
 local function main()
-    channel = arg[2]
+    channel = arg[1]
 
     if channel == nil then
         print("Please provide a channel name at the end of the command.")
