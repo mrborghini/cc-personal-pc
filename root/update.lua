@@ -1,7 +1,7 @@
 require("/utils/utils")
 
 function ApplyUpdate()
-    DownloadFile("https://raw.githubusercontent.com/mrborghini/cc-personal-pc/master/setup.lua", "/")
+    DownloadFile("https://raw.githubusercontent.com/mrborghini/cc-personal-pc/master/setup.lua", "/setup.lua")
     require("/setup")
 end
 
