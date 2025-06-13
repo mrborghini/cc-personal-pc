@@ -5,7 +5,7 @@ function ApplyUpdate()
     require("/setup")
 end
 
-function main()
+local function main()
     print("Welcome to the update tool")
 
     print("Are you sure you want to update?")
