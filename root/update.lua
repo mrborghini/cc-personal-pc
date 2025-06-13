@@ -1,4 +1,4 @@
-require("utils")
+require("/utils/utils")
 
 function ApplyUpdate()
     DownloadFile("https://raw.githubusercontent.com/mrborghini/cc-personal-pc/master/setup.lua", "/")
