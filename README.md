@@ -27,7 +27,7 @@ Once it's done installing you need to reboot the minecraft ![2024-03-03_23 00 04
 
 Well this program has a clone of ```cat``` from the GNU project and multiple useful utilities like random quotes. Ascii art and a user friendly update tool.
 
-## Commands:
+## General commands:
 
 ```
 cat <path>
@@ -51,4 +51,14 @@ startanim
 
 ```
 setup  // only required once
+```
+
+## Turtle commands
+
+```
+fill-mode
+```
+
+```
+mine <area> <depth>
 ```
