@@ -10,6 +10,7 @@ local function main()
     shell.setAlias("twitch", "/utils/twitch.lua")
     shell.setAlias("mine", "/utils/mine.lua")
     shell.setAlias("fill-mode", "/utils/fill-mode.lua")
+    shell.setAlias("activation-toggle", "/utils/activation-toggle.lua")
 end
 
 main()
