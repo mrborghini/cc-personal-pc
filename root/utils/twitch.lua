@@ -88,6 +88,10 @@ local function main()
                         })
                     end
 
+                    if selectedColor == nil then
+                        goto continue
+                    end
+
                     term.setTextColor(selectedColor)
                     write(twitchMessage.user)
                     term.setTextColor(colors.white)
