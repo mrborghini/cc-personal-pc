@@ -4,6 +4,7 @@ require("lambo-data-api-types")
 local flipped = false
 local ws
 local channel
+local toggleSelf = true
 
 local function connect()
     local url = "ws://" .. SERVER_URL .. "/realtime"
@@ -81,6 +82,9 @@ local function redstoneMonitorLoop()
                 }
                 ws.send(textutils.serialiseJSON(message))
                 print("Toggling...")
+                if toggleSelf then
+                    toggleRedstone()
+                end
             end
             previousState[side] = currentState
         end
