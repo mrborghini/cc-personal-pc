@@ -23,6 +23,11 @@ function Bot.lookLeft()
     turtle.turnLeft()
 end
 
+function Bot.turnAround()
+    turtle.turnLeft()
+    turtle.turnLeft()
+end
+
 -- @return number|string
 function Bot.currentFuel()
     return turtle.getFuelLevel()
@@ -33,11 +38,9 @@ function Bot.place()
 end
 
 function Bot.goBackwards()
-    Bot.lookLeft()
-    Bot.lookLeft()
+    Bot.turnAround()
     Bot.moveForward()
-    Bot.lookRight()
-    Bot.lookRight()
+    Bot.turnAround()
 end
 
 function Bot.getSlotWithSameItem()

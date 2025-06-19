@@ -38,8 +38,7 @@ local function main()
         return
     end
 
-    Bot.lookLeft()
-    Bot.lookLeft()
+    Bot.turnAround()
 
     for i = 1, depth do
         showProgressMessage(placedBlocks, totalBlocks)
@@ -81,7 +80,7 @@ local function main()
         end
     end
 
-    Bot.lookLeft() -- Turn again to make it easier to mine again
+    Bot.lookLeft()
     placedBlocks = placedBlocks + 1
     showProgressMessage(placedBlocks, totalBlocks)
     print()
