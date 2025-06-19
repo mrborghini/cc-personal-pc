@@ -38,6 +38,9 @@ local function main()
         return
     end
 
+    Bot.lookLeft()
+    Bot.lookLeft()
+
     for i = 1, depth do
         showProgressMessage(placedBlocks, totalBlocks)
 
