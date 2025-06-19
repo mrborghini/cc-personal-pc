@@ -45,8 +45,8 @@ local function main()
             showProgressMessage(placedBlocks, totalBlocks)
 
             for y = 1, area - 1 do
-                local slots = Bot.getSlotsWithSameItem()
-                Bot.transferToSelected(slots)
+                local slot = Bot.getSlotWithSameItem()
+                Bot.transferToSelected(slot)
 
                 showProgressMessage(placedBlocks, totalBlocks)
                 Bot.goBackwards()

@@ -40,22 +40,24 @@ function Bot.goBackwards()
     Bot.lookRight()
 end
 
-function Bot.getSlotsWithSameItem()
-    local slots = {}
+function Bot.getSlotWithSameItem()
     local selectedSlot = turtle.getSelectedSlot()
     for i = 1, 16 do
         if i ~= selectedSlot and turtle.compareTo(i) then
-            table.insert(slots, i)
+            return i
         end
     end
-    return slots
+    return nil
 end
 
-function Bot.transferToSelected(slots)
-    local selectedSlot = turtle.getSelectedSlot()
-    for _, slot in ipairs(slots) do
-        turtle.select(slot)
-        turtle.transferTo(selectedSlot)
+function Bot.transferToSelected(slot)
+    if slot == nil then
+        print("Warning: You are running out of items to be filling with.")
+        return
     end
+    local selectedSlot = turtle.getSelectedSlot()
+    local firstSlot = slot
+    turtle.select(firstSlot)
+    turtle.transferTo(selectedSlot)
     turtle.select(selectedSlot)
 end
