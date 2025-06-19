@@ -37,6 +37,10 @@ function Bot.place()
     turtle.place()
 end
 
+function Bot.placeBelow()
+    turtle.placeDown()
+end
+
 function Bot.goBackwards()
     Bot.turnAround()
     Bot.moveForward()

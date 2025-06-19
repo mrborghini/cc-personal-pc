@@ -73,7 +73,8 @@ local function main()
         end
 
         if i < depth then
-            Bot.moveDown()
+            Bot.moveUp()
+            Bot.placeBelow()
             Bot.lookLeft()
             placedBlocks = placedBlocks + 1
             showProgressMessage(placedBlocks, totalBlocks)
