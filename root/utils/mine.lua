@@ -2,7 +2,7 @@ require("/utils/utils")
 require("turtle-base-functions")
 
 local function showProgressMessage(minedBlocks, totalBlocks)
-    ShowProgressBar(minedBlocks, totalBlocks, string.format("Mined %d/%d", minedBlocks, totalBlocks))
+    ShowProgressBar(minedBlocks, totalBlocks, string.format("%d/%d", minedBlocks, totalBlocks))
 end
 
 local function main()
