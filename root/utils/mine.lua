@@ -32,6 +32,12 @@ local function main()
     local minedBlocks = 0
     local totalBlocks = area * area * depth
 
+    if totalBlocks > Bot.currentFuel() then
+        print("Not enough fuel for that area :(")
+        print(string.format("You need %d fuel, but you have %d", totalBlocks, Bot.currentFuel()))
+        return
+    end
+
     showProgressMessage(minedBlocks, totalBlocks)
 
     for i = 1, depth, 1 do
