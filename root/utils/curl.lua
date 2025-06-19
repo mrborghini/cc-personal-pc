@@ -1,4 +1,4 @@
-require("utils")
+require("/utils/utils")
 
 local function main()
     local err, response = GetRequest(arg[1])
