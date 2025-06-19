@@ -1,6 +1,10 @@
 require("/utils/utils")
 require("turtle-base-functions")
 
+local function showProgressMessage(minedBlocks, totalBlocks)
+    ShowProgressBar(minedBlocks, totalBlocks, string.format("Mined %d/%d", minedBlocks, totalBlocks))
+end
+
 local function main()
     local areaStr = arg[1]
     local depthStr = arg[2]
@@ -28,14 +32,14 @@ local function main()
     local minedBlocks = 0
     local totalBlocks = area * area * depth
 
-    ShowProgressBar(minedBlocks, totalBlocks)
+    showProgressMessage(minedBlocks, totalBlocks)
 
     for i = 1, depth, 1 do
-        ShowProgressBar(minedBlocks, totalBlocks)
+        showProgressMessage(minedBlocks, totalBlocks)
         for j = 1, area, 1 do
-            ShowProgressBar(minedBlocks, totalBlocks)
+            showProgressMessage(minedBlocks, totalBlocks)
             for y = 1, area - 1, 1 do
-                ShowProgressBar(minedBlocks, totalBlocks)
+                showProgressMessage(minedBlocks, totalBlocks)
                 Bot.moveForward()
                 minedBlocks = minedBlocks + 1
             end
@@ -65,12 +69,12 @@ local function main()
         Bot.moveDown()
         minedBlocks = minedBlocks + 1
         Bot.lookLeft()
-        ShowProgressBar(minedBlocks, totalBlocks)
+        showProgressMessage(minedBlocks, totalBlocks)
         ::continue::
     end
     Bot.lookLeft() -- Turn again to make it easier to mine again
     minedBlocks = minedBlocks + 1
-    ShowProgressBar(minedBlocks, totalBlocks)
+    showProgressMessage(minedBlocks, totalBlocks)
     print()
     print("Done mining")
 end

@@ -115,7 +115,7 @@ function DownloadFile(url, path)
 end
 
 -- This function will show a progress bar
-function ShowProgressBar(done, total)
+function ShowProgressBar(done, total, message)
     -- Check if the amount done is bigger than the total
     if done > total then
         print("The amount of done cannot be bigger than the total amount")
@@ -123,7 +123,7 @@ function ShowProgressBar(done, total)
     end
     local length = 16 -- This is the length of the bar
     -- calculate the percentage
-    local percentage = math.floor(done / total * 100)
+    local percentage = math.ceil(done / total * 100)
     -- calculate the amount of hashtags based on the percentage
     local numHashtags = math.floor(length * percentage / 100)
     -- Calculate the amount of dashes
@@ -151,6 +151,12 @@ function ShowProgressBar(done, total)
     -- Keep the cursor at the beginning of the line at the current height
     term.setCursorPos(1, y)
 
+    local progressString = string.format("[%s] %d%%", finalString, percentage)
+
+    if message ~= nil then
+        progressString = string.format("%s %s", progressString, message)
+    end
+
     -- Show the progress bar
-    write("[" .. finalString .. "]")
+    write(progressString)
 end
