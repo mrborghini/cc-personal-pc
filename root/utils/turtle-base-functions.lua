@@ -10,8 +10,35 @@ function Bot.moveDown()
     turtle.down()
 end
 
+local function isIndestructable(name)
+    local indestrucatableBlocks = { "minecraft:bedrock", "minecraft:end_portal_frame" }
+    for i = 1, #indestrucatableBlocks, 1 do
+        if indestrucatableBlocks[i] == name then
+            return true
+        end
+    end
+    return false
+end
+
 function Bot.moveForward()
-    turtle.dig()
+    while turtle.detect() do
+        local _, data = turtle.inspect()
+        if (isIndestructable(data["name"])) then
+            turtle.up()
+            turtle.forward()
+            while turtle.detectDown() do
+                local _, blockData = turtle.inspectDown()
+                if isIndestructable(blockData["name"]) then
+                    Bot.moveForward()
+                else
+                    break
+                end
+            end
+            turtle.digDown()
+            turtle.down()
+        end
+        turtle.dig()
+    end
     turtle.forward()
 end
 
