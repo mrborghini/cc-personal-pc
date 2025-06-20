@@ -74,7 +74,15 @@ local function main()
 
         if i < depth then
             Bot.moveUp()
+
             Bot.placeBelow()
+            -- This is to fix the bot from going the wrong direction if the area is a odd number
+            if area % 2 == 1 then
+                Bot.turnAround()
+                for i = 1, area - 1 do
+                    Bot.goBackwards()
+                end
+            end
             Bot.lookLeft()
             placedBlocks = placedBlocks + 1
             showProgressMessage(placedBlocks, totalBlocks)
