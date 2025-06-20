@@ -45,7 +45,7 @@ local function main()
         for j = 1, area, 1 do
             showProgressMessage(minedBlocks, totalBlocks)
 
-            for y = 1, area - 1, 1 do
+            for _ = 1, area - 1, 1 do
                 showProgressMessage(minedBlocks, totalBlocks)
                 Bot.moveForward()
                 minedBlocks = minedBlocks + 1
@@ -72,7 +72,7 @@ local function main()
             -- This is to fix the bot from going the wrong direction if the area is a odd number`
             if area % 2 == 1 then
                 Bot.turnAround()
-                for i = 1, area - 1 do
+                for _ = 1, area - 1 do
                     Bot.moveForward()
                 end
             end
