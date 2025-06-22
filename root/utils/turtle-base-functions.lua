@@ -65,6 +65,7 @@ function Bot.place()
 end
 
 function Bot.placeBelow()
+    turtle.digDown()
     turtle.placeDown()
 end
 

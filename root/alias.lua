@@ -12,6 +12,7 @@ local function main()
     shell.setAlias("fill-mode", "/utils/fill-mode.lua")
     shell.setAlias("activation-toggle", "/utils/activation-toggle.lua")
     shell.setAlias("fill", "/utils/fill.lua")
+    shell.setAlias("fast-fill", "/utils/fast-fill.lua")
 end
 
 main()

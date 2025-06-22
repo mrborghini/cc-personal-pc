@@ -11,8 +11,8 @@ local function main()
 
     if areaStr == nil or depthStr == nil then
         print(
-            "Mines an area completely. Area means 'width' and 'length'. 'depth' is how deep. Please note you must use a mining turtle.")
-        print("Usage: mine area depth")
+            "fills an area completely. Area means 'width' and 'length'. 'depth' is how deep. Please note you must use a mining turtle.")
+        print("Usage: fill area depth")
         return
     end
 
@@ -29,7 +29,7 @@ local function main()
     local area = tonumber(areaStr)
     local depth = tonumber(depthStr)
 
-    local minedBlocks = 0
+    local placedBlocks = 0
     local totalBlocks = area * area * depth
 
     if totalBlocks > Bot.currentFuel() then
@@ -38,52 +38,59 @@ local function main()
         return
     end
 
-    showProgressMessage(minedBlocks, totalBlocks)
+    Bot.moveUp()
+    Bot.placeBelow()
 
-    for i = 1, depth, 1 do
-        showProgressMessage(minedBlocks, totalBlocks)
-        for j = 1, area, 1 do
-            showProgressMessage(minedBlocks, totalBlocks)
+    for i = 1, depth do
+        showProgressMessage(placedBlocks, totalBlocks)
 
-            for _ = 1, area - 1, 1 do
-                showProgressMessage(minedBlocks, totalBlocks)
+        for j = 1, area do
+            showProgressMessage(placedBlocks, totalBlocks)
+
+            for _ = 1, area - 1 do
+                local slot = Bot.getSlotWithSameItem()
+                Bot.transferToSelected(slot)
+
+                showProgressMessage(placedBlocks, totalBlocks)
                 Bot.moveForward()
-                minedBlocks = minedBlocks + 1
+                Bot.placeBelow()
+                placedBlocks = placedBlocks + 1
             end
 
-            -- Move right if it's even and left if it's uneven
             if j < area then
                 if j % 2 == 0 then
                     Bot.lookRight()
                     Bot.moveForward()
+                    Bot.placeBelow()
                     Bot.lookRight()
                 else
                     Bot.lookLeft()
                     Bot.moveForward()
+                    Bot.placeBelow()
                     Bot.lookLeft()
                 end
+                placedBlocks = placedBlocks + 1
             end
-            minedBlocks = minedBlocks + 1
         end
 
         if i < depth then
-            Bot.moveDown()
-            -- This is to fix the bot from going the wrong direction if the area is a odd number`
+            Bot.moveUp()
+            Bot.placeBelow()
+            -- This is to fix the bot from going the wrong direction if the area is a odd number
             if area % 2 == 1 then
                 Bot.turnAround()
-                for _ = 1, area - 1 do
-                    Bot.moveForward()
-                end
+            else
+                Bot.lookLeft()
             end
-            Bot.lookLeft()
-            minedBlocks = minedBlocks + 1
-            showProgressMessage(minedBlocks, totalBlocks)
+
+            placedBlocks = placedBlocks + 1
+            showProgressMessage(placedBlocks, totalBlocks)
         end
-        showProgressMessage(minedBlocks, totalBlocks)
     end
-    Bot.lookLeft() -- Turn again to make it easier to mine again
-    minedBlocks = minedBlocks + 1
-    showProgressMessage(minedBlocks, totalBlocks)
+
+    Bot.lookLeft()
+    placedBlocks = placedBlocks + 1
+    showProgressMessage(placedBlocks, totalBlocks)
     print()
     print("Done mining")
 end
